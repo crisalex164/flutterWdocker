@@ -1,0 +1,27 @@
+services:
+  flutter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+      - flutter-sdk:/home/developer/flutter
+      - android-sdk:/home/developer/android-sdk
+      - flutter-pub-cache:/home/developer/.pub-cache
+    environment:
+      - DISPLAY=${DISPLAY}
+    # Configuración crucial para desarrollo móvil
+    privileged: true  # Permite acceso a dispositivos USB
+    network_mode: "host"  # Mejor conectividad para dispositivos locales
+    devices:
+      - /dev/bus/usb:/dev/bus/usb  # Mapea dispositivos USB para Android
+    ports:
+      - "8080:8080"  # Para web server (por si lo necesitas en algún momento)
+    tty: true
+    stdin_open: true
+    command: bash
+
+volumes:
+  flutter-sdk:
+  android-sdk:
+  flutter-pub-cache:

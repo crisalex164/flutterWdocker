@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  flutter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+      - flutter-sdk:/home/developer/flutter
+      - android-sdk:/home/developer/android-sdk
+      - flutter-pub-cache:/home/developer/.pub-cache
+    environment:
+      - ANDROID_SDK_ROOT=/home/developer/android-sdk
+      - ADB_SERVER_SOCKET=tcp:host.docker.internal:5037  # Conecta al ADB del host Windows
+    ports:
+      - "8080:8080"  # Para web server
+      - "8888:8888"  # Para otros servicios web
+      - "9100-9101:9100-9101"  # Para debugging
+      - "35729:35729"  # Para hot reload
+    tty: true
+    stdin_open: true
+    command: bash
+    # En Windows, Docker Desktop maneja automáticamente algunos aspectos de USB
+
+volumes:
+  flutter-sdk:
+  android-sdk:
+  flutter-pub-cache:

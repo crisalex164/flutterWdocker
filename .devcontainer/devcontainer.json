@@ -1,0 +1,61 @@
+{
+  "name": "Flutter Mobile Development",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "flutter",
+  "workspaceFolder": "/app",
+  "forwardPorts": [8080, 8888, 9100, 9101, 35729],
+  "privileged": true,
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dart-code.dart-code",
+        "dart-code.flutter",
+        "aksharpatel47.vscode-flutter-helper",
+        "robert-brunhage.flutter-riverpod-snippets",
+        "nash.awesome-flutter-snippets",
+        "rangav.vscode-thunder-client",
+        "localizely.flutter-intl",
+        "formulahendry.terminal"
+      ],
+      "settings": {
+        "dart.flutterSdkPath": "/home/developer/flutter",
+        "dart.debugExternalPackageLibraries": false,
+        "dart.debugSdkLibraries": false,
+        "dart.previewFlutterUiGuides": true,
+        "dart.previewFlutterUiGuidesCustomTracking": true,
+        "dart.closingLabels": true,
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [80],
+        "editor.codeActionsOnSave": {
+          "source.fixAll": true
+        },
+        "explorer.fileNesting.enabled": true,
+        "explorer.fileNesting.patterns": {
+          "*.dart": "${capture}.g.dart, ${capture}.freezed.dart, ${capture}.config.dart"
+        },
+        "[dart]": {
+          "editor.formatOnSave": true,
+          "editor.formatOnType": true,
+          "editor.selectionHighlight": false,
+          "editor.suggest.snippetsPreventQuickSuggestions": false,
+          "editor.suggestSelection": "first",
+          "editor.tabCompletion": "onlySnippets",
+          "editor.wordBasedSuggestions": false
+        },
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+          }
+        }
+      }
+    }
+  },
+  "remoteUser": "developer",
+  "postStartCommand": "flutter doctor -v && echo 'Contenedor Flutter listo para desarrollo móvil!'"
+}
